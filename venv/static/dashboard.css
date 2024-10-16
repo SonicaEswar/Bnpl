@@ -1,0 +1,183 @@
+/* General body styling for dashboard page */
+body.dashboard-page {
+    background-image: url('/static/images/dashboard.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    height: 200vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Logout button styling */
+.logout-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background-color: #0aeb60;
+}
+
+/* Tool suggestion section */
+.tool-container {
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px;
+    gap: 10px; /* Adds space between items if needed */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.tool-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px; /* Adjust padding if needed */
+    width: 15%; /* Adjust width as needed */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.tool-card:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.tool-icon img {
+    width: 80%; /* Resize icons to be smaller */
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.tool-info h3 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.tool-info p {
+    font-size: 1em;
+    color: #666;
+}
+
+/* Tool Suggestions heading alignment */
+.tool-suggestions-heading {
+    text-align: left; /* Align the heading to the left */
+    margin-left: 20px; /* Add some margin to the left */
+    width: 100%; /* Ensure it takes the full width */
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal content box styling */
+.modal-content {
+    background: linear-gradient(135deg, #f2f2f2, #e0e0e0); /* Gradient background */
+    margin: 15% auto; /* Centered */
+    padding: 30px;
+    border: 2px solid #4CAF50; /* Green border */
+    width: 80%; /* Could be more or less */
+    max-width: 600px; /* Limit width */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    position: relative; /* Ensure that the close button is positioned correctly */
+}
+
+/* Title and description inside modal */
+.modal-content h2 {
+    font-size: 2em;
+    color: #4CAF50; /* Green title */
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    font-size: 1.1em;
+    color: #555; /* Dark gray text */
+}
+
+/* Close button styling */
+.close-btn {
+    position: absolute; /* Position the button absolutely */
+    top: 10px; /* 10px from the top */
+    right: 10px; /* 10px from the right */
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #4CAF50; /* Green button */
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.close-btn:focus {
+    outline: none;
+}
+
+/* Animation for modal opening */
+.modal-content {
+    animation: slideIn 0.4s ease-out;
+}
+
+/* Modal slide-in animation */
+@keyframes slideIn {
+    from {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Buy Now button inside modal */
+.buy-now-btn {
+    background-color: #4CAF50; /* Green background */
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.buy-now-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.buy-now-btn:focus {
+    outline: none;
+}

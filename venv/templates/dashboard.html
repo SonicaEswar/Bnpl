@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='iaas.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='saas.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='paas.css') }}">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = {{ get_flashed_messages(with_categories=True) | tojson | safe }};
+            flashMessages.forEach(message => {
+                const [category, text] = message;
+                if (category === 'success') {
+                    alert('Success: ' + text);
+                } else if (category === 'error') {
+                    alert('Error: ' + text);
+                }
+            });
+
+            const modal = document.getElementById("more-info-modal");
+            const closeBtn = document.getElementsByClassName("close-btn")[0];
+
+            // The data for additional info for each tool
+            const toolAdditionalInfo = {
+                "IAAS Tool 1": "IAAS Tool 1 helps you manage infrastructure, scaling on-demand based on your business needs.",
+                "IAAS Tool 2": "IAAS Tool 2 provides robust security and a flexible environment for running applications.",
+                "SAAS Tool 1": "SAAS Tool 1 is a powerful platform to enhance productivity and simplify collaboration.",
+                "SAAS Tool 2": "SAAS Tool 2 is designed to optimize performance with cloud-based solutions.",
+                "PAAS Tool 1": "PAAS Tool 1 allows developers to build and deploy applications with minimal infrastructure management.",
+                "PAAS Tool 2": "PAAS Tool 2 offers great flexibility and speed, perfect for dynamic applications."
+            };
+
+            window.showToolInfo = function(toolName) {
+                const modalMoreInfoContent = document.getElementById("modal-more-info");
+
+                // Set the additional content specific to the tool
+                modalMoreInfoContent.innerHTML = `
+                    <h3>More Info:</h3>
+                    <p>${toolAdditionalInfo[toolName] || "Allows developers to build and deploy applications with minimal infrastructure management."}</p>
+                `;
+
+                // Show the modal
+                modal.style.display = "block";
+            };
+
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            };
+
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+        });
+    </script>
+</head>
+<body class="dashboard-page">
+    <!-- Logout button -->
+    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+
+    <!-- Dashboard heading and user greeting -->
+    <h1><p>Welcome, {{ user.username }}!</p></h1>
+
+    <!-- Tool suggestions section -->
+    <h2 class="tool-suggestions-heading">Tool Suggestions</h2>
+
+    <!-- IAAS Tools Section -->
+    <div class="iaas-container">
+        <h3 class="iaas-heading">IAAS TOOLS <button id="toggle-icons-iaas" class="toggle-btn">▼</button></h3>
+        <div id="icons-container-iaas" class="tool-container">
+            {% for suggestion in tool_suggestions %}
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <img src="{{ url_for('static', filename='icons/iaas.jpeg') }}" alt="{{ suggestion.name }} Icon">
+                </div>
+                <div class="tool-info">
+                    <h3>{{ suggestion.name }}</h3>
+                    <p>{{ suggestion.description }}</p>
+                    <button class="more-info-btn" onclick="showToolInfo('{{ suggestion.name }}');">More Info</button>
+                </div>
+            </div>
+            {% endfor %}
+            <button class="see-more-btn"></button>
+        </div>
+    </div>
+
+    <!-- SAAS Tools Section -->
+    <div class="saas-container">
+        <h3 class="saas-heading">SAAS TOOLS <button id="toggle-icons-saas" class="toggle-btn">▼</button></h3>
+        <div id="icons-container-saas" class="tool-container">
+            {% for suggestion in tool_suggestions %}
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <img src="{{ url_for('static', filename='icons/saas.jpg') }}" alt="{{ suggestion.name }} Icon">
+                </div>
+                <div class="tool-info">
+                    <h3>{{ suggestion.name }}</h3>
+                    <p>{{ suggestion.description }}</p>
+                    <button class="more-info-btn" onclick="showToolInfo('{{ suggestion.name }}');">More Info</button>
+                </div>
+            </div>
+            {% endfor %}
+            <button class="see-more-btn"></button>
+        </div>
+    </div>
+
+    <!-- PAAS Tools Section -->
+    <div class="paas-container">
+        <h3 class="paas-heading">PAAS TOOLS <button id="toggle-icons-paas" class="toggle-btn">▼</button></h3>
+        <div id="icons-container-paas" class="tool-container">
+            {% for suggestion in tool_suggestions %}
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <img src="{{ url_for('static', filename='icons/paas.png') }}" alt="{{ suggestion.name }} Icon">
+                </div>
+                <div class="tool-info">
+                    <h3>{{ suggestion.name }}</h3>
+                    <p>{{ suggestion.description }}</p>
+                    <button class="more-info-btn" onclick="showToolInfo('{{ suggestion.name }}');">More Info</button>
+                </div>
+            </div>
+            {% endfor %}
+            <button class="see-more-btn"></button>
+        </div>
+    </div>
+
+    <!-- Modal for displaying more info -->
+    <div id="more-info-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+
+            <!-- Just the additional info for the tool will appear -->
+            <div id="modal-more-info"></div>
+
+            <button onclick="window.location.href='http://localhost:3000';" class="buy-now-btn">Buy Now</button>
+        </div>
+    </div>
+
+    <!-- Button to go to Project 2 -->
+    <!-- <button onclick="window.location.href='http://localhost:3000';" class="project-link-btn">
+        Next
+    </button> -->
+</body>
+</html>
